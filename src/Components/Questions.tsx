@@ -166,7 +166,10 @@ const Questions: React.FC = () => {
                 >
                   {/* Question */}
                   <div className="flex items-center justify-between">
-                    <p className="text-lg font-medium mb-4">{`Category ${item.category}`}</p>
+                    <div>
+                      <p className="text-base font-medium">{`Quiz: ${currentQuestion}/${data.length}`}</p>
+                      <p className="text-lg font-medium mb-4">{`Category ${item.category}`}</p>
+                    </div>
 
                     <p className="text-lg font-medium mb-4">{`Score: ${score}`}</p>
                   </div>
