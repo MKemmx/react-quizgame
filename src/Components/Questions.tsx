@@ -27,10 +27,6 @@ const Questions: React.FC = () => {
   const [message, setMessage] = useState<Message | null>(null);
 
   const handleCheck = (params: Checker) => {
-    if (currentQuestion === data.length) {
-      setIsPlaying(false);
-      setGameOver(true);
-    }
     const myAnswer = params;
     const question = data.find((item) => item.id === currentQuestion);
 
@@ -92,6 +88,13 @@ const Questions: React.FC = () => {
   useEffect(() => {
     fetchQuestions();
   }, []);
+
+  useEffect(() => {
+    if (currentQuestion === data.length) {
+      setIsPlaying(false);
+      setGameOver(true);
+    }
+  }, [currentQuestion]);
 
   return (
     <div className="h-screen w-full flex justify-center items-start bg-slate-200">
@@ -206,6 +209,14 @@ const Questions: React.FC = () => {
           <div className="mt-52 max-w-lg w-full py-20 rounded-lg flex flex-col space-y-5 justify-center items-center bg-white">
             {gameOver ? (
               <div>
+                <div className="text-center text-lg mb-2 font-medium">
+                  {score <= 5 ? (
+                    <p> Better luck next time!</p>
+                  ) : (
+                    <p> Nice Job</p>
+                  )}
+                </div>
+
                 <p className="text-lg">
                   You score is: <span className="font-medium"> {score} </span>{" "}
                   out of {data.length}
